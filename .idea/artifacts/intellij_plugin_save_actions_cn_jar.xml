@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="intellij-plugin-save-actions-cn:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/intellij_plugin_save_actions_cn_jar</output-path>
+    <root id="archive" name="intellij-plugin-save-actions-cn.jar">
+      <element id="module-output" name="intellij-plugin-save-actions-cn" />
+    </root>
+  </artifact>
+</component>
