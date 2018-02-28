@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<idea-plugin version="2">
+
+    <id>com.dubreuia</id>
+    <name>Save Actions</name>
+    <version>0.24</version>
+    <vendor email="dubreuil.alex@gmail.com" url="https://www.github.com/dubreuia">Alexandre DuBreuil</vendor>
+
+    <description><![CDATA[
+<p>Supports configurable, Eclipse like, save actions, including "organize imports", "reformat code", "rearrange code", "compile file" and some quick fixes for Java like "add / remove 'this' qualifier", etc. The plugin executes the configured actions when the file is synchronised (or saved) on disk.</p>
+
+<p><strong>Features</strong></p>
+
+<ul>
+  <li>Organize imports</li>
+  <li>Run on file save or shortcut (or both)</li>
+  <li>Reformat code (whole file or only changed text)</li>
+  <li>Rearrange code (reorder methods, fields, etc.)</li>
+  <li>Include / exclude files with regex support</li>
+  <li>Works any file type (Java, Python, XML, etc.)</li>
+  <li>Uses a settings file per project you can commit</li>
+  <li>Available keymaps for activation</li>
+  <li>Other IDE support (Eclipse *.epf files)</li>
+  <li>Automatically fix Java inspections (Intellij IDEA only)</li>
+</ul>
+
+<p><strong>Compatibility (build 163.7743.44, 2016.3.6, JDK 1.6)</strong></p>
+
+<ul>
+  <li>Intellij IDEA</li>
+  <li>PyCharm</li>
+  <li>PHPStorm</li>
+  <li>AndroidStudio</li>
+  <li>WebStorm</li>
+</ul>
+
+<p><strong>Documentation</strong></p>
+
+<ul>
+  <li><a href="https://plugins.jetbrains.com/plugin/7642-save-actions">Jetbrains plugin page</a></li>
+  <li><a href="https://github.com/dubreuia/intellij-plugin-save-actions">Github README</a></li>
+  <li><a href="https://github.com/dubreuia/intellij-plugin-save-actions/issues">Github issues</a></li>
+  <li><a href="https://twitter.com/dubreuia">Twitter</a></li>
+</ul>
+    ]]></description>
+
+    <change-notes><![CDATA[
+        Release notes: <a href="https://github.com/dubreuia/intellij-plugin-save-actions/releases">https://github.com/dubreuia/intellij-plugin-save-actions/releases</a>
+    ]]>
+    </change-notes>
+
+    <idea-version since-build="135"/>
+
+    <!-- Other product support activated in plugin page during upload at https://plugins.jetbrains.com -->
+    <depends optional="true" config-file="plugin-java.xml">com.intellij.modules.java</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <projectService serviceImplementation="com.dubreuia.model.Storage"/>
+        <projectConfigurable id="settings.saveactions" instance="com.dubreuia.ui.Configuration"/>
+    </extensions>
+
+    <application-components>
+        <component>
+            <implementation-class>com.dubreuia.core.Component</implementation-class>
+        </component>
+    </application-components>
+
+    <project-components>
+    </project-components>
+
+    <actions>
+        <action id="com.dubreuia.core.SaveActionShortcutManager" class="com.dubreuia.core.SaveActionShortcutManager"
+                text="Save Actions" description="Executes save actions with a shortcut">
+            <add-to-group group-id="CodeFormatGroup" anchor="after" relative-to-action="RearrangeCode"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl S"/>
+        </action>
+        <action class="com.dubreuia.core.SaveActionToggleAction" id="com.dubreuia.core.SaveActionToggleAction"
+                text="Enable Save Actions" description="Toggle the activation of Save Actions"/>
+    </actions>
+</idea-plugin>
